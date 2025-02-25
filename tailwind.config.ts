@@ -1,6 +1,8 @@
-import type { Config } from "tailwindcss";
+import withMT from "@material-tailwind/react/utils/withMT";
 
-export default {
+
+module.exports = withMT({
+
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,10 +11,17 @@ export default {
   theme: {
     extend: {
       colors: {
+        fontColor: {
+          DEFAULT: "#000",
+          light: "#8B8B8B",
+          dark: "#464646",
+
+        },
         primary: {
           DEFAULT: "#ac0412",
           light: "#c21523",
           dark: "#960310",
+          hover: "#9B0410",
         },
 
         secondary: {
@@ -21,7 +30,7 @@ export default {
         },
 
         accent: {
-          DEFAULT: "#ffeaec",
+          DEFAULT: "#FFFEFE",
           transparent: "rdba (255, 234, 236, 0.15)",
         },
         dark: {
@@ -58,4 +67,4 @@ export default {
   },
   darkMode: "selector",
   plugins: [],
-} satisfies Config;
+});

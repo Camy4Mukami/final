@@ -2,25 +2,25 @@
 
 import RegisterForm from "@/components/auth/RegisterForm";
 import Image from "next/image";
-import Hero from "@/app/assets/header-hero.jpeg";
+import SignUp from "@/app/assets/sign-upImage.png";
 
 export default function RegisterPage() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50">
-      <div className="w-full max-w-6xl bg-white rounded-2xl shadow-xl overflow-hidden flex">
+      <div className="w-full max-w-6xl bg-accent rounded-2xl shadow-xl overflow-hidden flex">
         {/* Left Section */}
         <div className="hidden lg:block lg:w-1/2 relative">
           {/* Background Image */}
           <div className="absolute inset-0">
             <Image
-              src={Hero}
+              src={SignUp}
               alt="Welcome"
               fill
-              className="object-cover"
+              className="w-full h-full object-contain"
               priority
             />
             {/* Overlay */}
-            <div className="absolute inset-0 bg-black/30" />
+            {/* <div className="absolute inset-0 bg-black/30" /> */}
           </div>
           
           {/* Content */}

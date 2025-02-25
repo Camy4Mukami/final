@@ -4,8 +4,7 @@ import { Eye, EyeOff } from 'lucide-react';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     email: '',
     phoneNumber: '',
     password: '',
@@ -17,7 +16,7 @@ const RegisterForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const RequiredIndicator = () => (
-    <span className="text-[#ac0412] ml-1">*</span>
+    <span className="text-primary ml-1">*</span>
   );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +25,6 @@ const RegisterForm = () => {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -37,18 +35,11 @@ const RegisterForm = () => {
 
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
-    
-    // First Name validation
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
+
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = 'Full name is required';
     }
 
-    // Last Name validation
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
-    }
-
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -56,7 +47,6 @@ const RegisterForm = () => {
       newErrors.email = 'Please enter a valid email';
     }
 
-    // Phone validation
     const phoneRegex = /^\d{10}$/;
     if (!formData.phoneNumber.trim()) {
       newErrors.phoneNumber = 'Phone number is required';
@@ -64,14 +54,10 @@ const RegisterForm = () => {
       newErrors.phoneNumber = 'Please enter a valid 10-digit phone number';
     }
 
-    // Password validation
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
     }
 
-    // Confirm Password validation
     if (!formData.confirmPassword) {
       newErrors.confirmPassword = 'Please confirm your password';
     } else if (formData.password !== formData.confirmPassword) {
@@ -86,7 +72,6 @@ const RegisterForm = () => {
     const newErrors = validateForm();
 
     if (Object.keys(newErrors).length === 0) {
-      // Handle successful form submission here
       console.log('Form submitted:', formData);
     } else {
       setErrors(newErrors);
@@ -95,81 +80,63 @@ const RegisterForm = () => {
 
   return (
     <div className="w-full max-w-md mx-auto p-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Create an Account</h2>
-      
+      <h2 className="text-2xl font-bold text-center text-fontColor">Create an account</h2>
+      <p className="text-sm text-center text-fontColor-dark mb-6">Let&apos;s get you set up and start your journey with us!</p>
+
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-              First Name<RequiredIndicator />
-            </label>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              value={formData.firstName}
-              onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ac0412] ${
-                errors.firstName ? 'border-red-500' : 'border-gray-300'
+        <div>
+          <label htmlFor="fullName" className="block text-sm font-medium text-fontColor mb-1">
+            Full Name<RequiredIndicator />
+          </label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            placeholder="Jane Doe"
+            value={formData.fullName}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-fontColor-dark ${errors.fullName ? 'border-primary' : 'border-fontColor-light'
               }`}
-            />
-            {errors.firstName && <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>}
-          </div>
-          
-          <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
-              Last Name<RequiredIndicator />
-            </label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={formData.lastName}
-              onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ac0412] ${
-                errors.lastName ? 'border-red-500' : 'border-gray-300'
-              }`}
-            />
-            {errors.lastName && <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>}
-          </div>
+          />
+          {errors.fullName && <p className="mt-1 text-sm text-primary">{errors.fullName}</p>}
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-            Email Address<RequiredIndicator />
+          <label htmlFor="email" className="block text-sm font-medium text-fontColor mb-1">
+            Email<RequiredIndicator />
           </label>
           <input
             type="email"
             id="email"
             name="email"
+            placeholder="example.email.com"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ac0412] ${
-              errors.email ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-fontColor-dark ${errors.email ? 'border-primary' : 'border-fontColor-light'
+              }`}
           />
-          {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+          {errors.email && <p className="mt-1 text-sm text-primary">{errors.email}</p>}
         </div>
 
         <div>
-          <label htmlFor="phoneNumber" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="phoneNumber" className="block text-sm font-medium text-fontColor mb-1">
             Phone Number<RequiredIndicator />
           </label>
           <input
             type="tel"
             id="phoneNumber"
             name="phoneNumber"
+            placeholder="0712345678"
             value={formData.phoneNumber}
             onChange={handleChange}
-            className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ac0412] ${
-              errors.phoneNumber ? 'border-red-500' : 'border-gray-300'
-            }`}
+            className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-fontColor-dark ${errors.phoneNumber ? 'border-primary' : 'border-fontColor-light'
+              }`}
           />
-          {errors.phoneNumber && <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>}
+          {errors.phoneNumber && <p className="mt-1 text-sm text-primary">{errors.phoneNumber}</p>}
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium text-fontColor mb-1">
             Password<RequiredIndicator />
           </label>
           <div className="relative">
@@ -179,23 +146,22 @@ const RegisterForm = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ac0412] ${
-                errors.password ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-fontColor-dark ${errors.password ? 'border-primary' : 'border-fontColor-light'
+                }`}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-fontColor-light"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
-          {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
+          {errors.password && <p className="mt-1 text-sm text-primary">{errors.password}</p>}
         </div>
 
         <div>
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-fontColor mb-1">
             Confirm Password<RequiredIndicator />
           </label>
           <div className="relative">
@@ -205,44 +171,39 @@ const RegisterForm = () => {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ac0412] ${
-                errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-fontColor-dark ${errors.confirmPassword ? 'border-primary' : 'border-fontColor-light'
+                }`}
             />
             <button
               type="button"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-fontColor-light"
             >
               {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
-          {errors.confirmPassword && <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>}
+          {errors.confirmPassword && <p className="mt-1 text-sm text-primary">{errors.confirmPassword}</p>}
         </div>
-
-        <p className="text-sm text-gray-500 mt-2">
-          <span className="text-[#ac0412]">*</span> Required fields
-        </p>
 
         <button
           type="submit"
-          className="w-full bg-[#ac0412] text-white py-2 px-4 rounded-lg hover:bg-[#c21523] transition duration-200"
+          className="w-full bg-primary text-white py-3 px-4 rounded-xl hover:bg-primary-hover transition duration-200 mt-6"
         >
-          Create Account
+          Sign Up
         </button>
 
-        <div className="relative py-3">
+        <div className="relative py-4">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-300"></div>
+            <div className="w-full border-t border-fontColor-light"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">Or continue with</span>
+            <span className="px-2 bg-white text-fontColor-light">Or</span>
           </div>
         </div>
 
         <button
           type="button"
-          className="w-full border border-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-50 flex items-center justify-center gap-2"
+          className="w-full border border-fontColor-light text-fontColor-dark py-3 px-4 rounded-xl hover:bg-gray-50 flex items-center justify-center gap-2"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path
@@ -264,6 +225,13 @@ const RegisterForm = () => {
           </svg>
           Continue with Google
         </button>
+
+        <p className="text-sm text-center text-fontColor-dark mt-4">
+          Already have an account?{' '}
+          <a href="/login" className="text-primary hover:text-primary-hover">
+            Log in
+          </a>
+        </p>
       </form>
     </div>
   );
