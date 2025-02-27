@@ -2,15 +2,16 @@ import type { Metadata } from "next";
 import { Poppins, Merriweather } from "next/font/google";
 import "@/styles/globals.css";
 
+import { AuthProvider } from "@/context/AuthContext";
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
 const merriweather = Merriweather({
-    subsets: ["latin"],
-    weight: ["400"],
-
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +29,9 @@ export default function RootLayout({
       <body
         className={`${poppins.className} ${merriweather.className} antialiased`}
       >
-        {children}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

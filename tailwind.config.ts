@@ -15,10 +15,11 @@ module.exports = withMT({
           DEFAULT: "#000",
           light: "#8B8B8B",
           dark: "#464646",
+          darker: "#4F1C1C",
 
         },
         primary: {
-          DEFAULT: "#ac0412",
+          DEFAULT: "#e14f4f",
           light: "#c21523",
           dark: "#960310",
           hover: "#9B0410",

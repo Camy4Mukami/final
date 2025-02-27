@@ -1,193 +1,24 @@
-import Image from 'next/image';
-import Hero from "@/app/assets/header-hero.jpeg"
-import { Star, Calendar, MapPin, Shield } from 'lucide-react';
+import Navbar from '@/components/layout/Navigation'
+import HeroSection from '@/components/layout/HeroSection'
+import AboutUs from '@/components/layout/AboutUs'
+import WhyUs from '@/components/layout/WhyUs'
 
-const DualLandingPage = () => {
+const Page = () => {
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="text-2xl font-serif text-gray-800">NailsNest</div>
-        <div className="hidden md:flex space-x-6 items-center">
-          <a href="#services" className="text-gray-600 hover:text-[#ac0412]">Services</a>
-          <a href="#process" className="text-gray-600 hover:text-[#ac0412]">How It Works</a>
-          <button className="bg-[#ffeaec] text-[#ac0412] px-4 py-2 rounded-lg hover:bg-[#c21523] hover:text-white">
-            Book Now
-          </button>
-          <button className="bg-[#9d1e28] text-white px-4 py-2 rounded-lg hover:bg-[#370B0E]">
-            Join as Technician
-          </button>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-[#ffeaec] to-[rgba(255,234,236,0.15)]">
-        <div className="container mx-auto px-4 py-16 grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h1 className="text-4xl font-semibold text-gray-900 mb-4">
-              Your Nail Services Journey Starts Here
-            </h1>
-            <p className="text-gray-600 mb-8">
-              Whether you&apos;re seeking professional nail services or ready to showcase your expertise,
-              NailsNest connects talented technicians with beauty enthusiasts.
-            </p>
-            <div className="flex gap-4">
-              <button className="bg-[#ac0412] text-white px-6 py-3 rounded-lg hover:bg-[#c21523]">
-                Book a Service
-              </button>
-              <button className="bg-[#9d1e28] text-white px-6 py-3 rounded-lg hover:bg-[#370B0E]">
-                Become a Technician
-              </button>
-            </div>
-          </div>
-          <div className="relative">
-            <Image
-              src={Hero}
-              alt="Nail service illustration"
-              className="rounded-lg shadow-lg"
-            />
-          </div>
-        </div>
+    <div className="relative min-h-screen">
+      {/* Hero section with full background image */}
+      <HeroSection />
+      
+      {/* Navbar positioned on top with z-index */}
+      <div className="absolute top-0 left-0 w-full z-50">
+        <Navbar />
       </div>
-
-      {/* Service Icons */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-4 gap-4 max-w-3xl mx-auto">
-          {['Nail Pedi', 'Gel Polish', 'Manicure', 'Repairs'].map((service) => (
-            <div key={service} className="text-center">
-              <div className="w-16 h-16 mx-auto mb-2 bg-[#ffeaec] rounded-full flex items-center justify-center">
-                <Star className="w-8 h-8 text-[#ac0412]" />
-              </div>
-              <p className="text-gray-700">{service}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Featured Services */}
-      <div className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-semibold text-center mb-12">Services & Opportunities</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Client Section */}
-          <div className="bg-[#ffeaec] p-8 rounded-lg">
-            <h3 className="text-2xl font-semibold mb-6">For Clients</h3>
-            <div className="space-y-4 mb-6">
-              <div className="flex items-center gap-3">
-                <Calendar className="w-5 h-5 text-[#ac0412]" />
-                <p>Flexible booking times</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-[#ac0412]" />
-                <p>At-home services</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Shield className="w-5 h-5 text-[#ac0412]" />
-                <p>Verified professionals</p>
-              </div>
-            </div>
-            <button className="bg-[#ac0412] text-white px-6 py-3 rounded-lg hover:bg-[#c21523] w-full">
-              Browse Services
-            </button>
-          </div>
-
-          {/* Technician Section */}
-          <div className="bg-[rgba(255,234,236,0.15)] p-8 rounded-lg">
-            <h3 className="text-2xl font-semibold mb-6">For Technicians</h3>
-            <div className="space-y-4 mb-6">
-              <div className="flex items-center gap-3">
-                <Calendar className="w-5 h-5 text-[#9d1e28]" />
-                <p>Set your own schedule</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-5 h-5 text-[#9d1e28]" />
-                <p>Choose your service area</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Shield className="w-5 h-5 text-[#9d1e28]" />
-                <p>Build your client base</p>
-              </div>
-            </div>
-            <button className="bg-[#9d1e28] text-white px-6 py-3 rounded-lg hover:bg-[#370B0E] w-full">
-              Start Earning
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Testimonials */}
-      <div className="container mx-auto px-4 py-12 bg-gray-50">
-        <h2 className="text-3xl font-semibold text-center mb-12">What Our Community Says</h2>
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <p className="text-gray-600 mb-4">
-              &quot;Finding clients has never been easier. I love the flexibility of choosing my own schedule.&quot;
-            </p>
-            <div className="flex items-center gap-3">
-              <Image src={Hero} alt="Technician" className="rounded-full" width={40} height={40} />
-              <div>
-                <p className="font-semibold">Sarah K.</p>
-                <p className="text-sm text-gray-500">Nail Technician</p>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <p className="text-gray-600 mb-4">
-              &quot;Amazing service right at my home. The booking process was super simple!&quot;
-            </p>
-            <div className="flex items-center gap-3">
-              <Image src={Hero} alt="Client" className="rounded-full" width={40} height={40} />
-              <div>
-                <p className="font-semibold">Emma R.</p>
-                <p className="text-sm text-gray-500">Client</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Contact Section */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-4">Ready to Get Started?</h2>
-          <p className="text-gray-600 mb-8">
-            Join our community today and experience the future of nail services
-          </p>
-          <div className="flex gap-4 justify-center">
-            <button className="bg-[#ac0412] text-white px-6 py-3 rounded-lg hover:bg-[#c21523]">
-              Book a Service
-            </button>
-            <button className="bg-[#9d1e28] text-white px-6 py-3 rounded-lg hover:bg-[#370B0E]">
-              Join as Technician
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-50 py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-xl font-semibold mb-4">NailsNest</h3>
-              <p className="text-gray-600">Connecting beauty professionals with clients</p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <div className="space-y-2">
-                <a href="#" className="block text-gray-600 hover:text-[#ac0412]">Services</a>
-                <a href="#" className="block text-gray-600 hover:text-[#ac0412]">How It Works</a>
-                <a href="#" className="block text-gray-600 hover:text-[#ac0412]">Join Us</a>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <p className="text-gray-600">support@nailsnest.com</p>
-            </div>
-          </div>
-        </div>
-      </footer>
+      
+      {/* About Us section */}
+      <AboutUs />
+      <WhyUs />
     </div>
-  );
-};
+  )
+}
 
-export default DualLandingPage;
+export default Page

@@ -4,7 +4,8 @@ import { Eye, EyeOff } from 'lucide-react';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phoneNumber: '',
     password: '',
@@ -36,8 +37,12 @@ const RegisterForm = () => {
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
 
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required';
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Last name is required';
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -84,21 +89,40 @@ const RegisterForm = () => {
       <p className="text-sm text-center text-fontColor-dark mb-6">Let&apos;s get you set up and start your journey with us!</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-fontColor mb-1">
-            Full Name<RequiredIndicator />
-          </label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            placeholder="Jane Doe"
-            value={formData.fullName}
-            onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-fontColor-dark ${errors.fullName ? 'border-primary' : 'border-fontColor-light'
-              }`}
-          />
-          {errors.fullName && <p className="mt-1 text-sm text-primary">{errors.fullName}</p>}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label htmlFor="firstName" className="block text-sm font-medium text-fontColor mb-1">
+              First Name<RequiredIndicator />
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              placeholder="Jane"
+              value={formData.firstName}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-fontColor-dark ${errors.firstName ? 'border-primary' : 'border-fontColor-light'
+                }`}
+            />
+            {errors.firstName && <p className="mt-1 text-sm text-primary">{errors.firstName}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="lastName" className="block text-sm font-medium text-fontColor mb-1">
+              Last Name<RequiredIndicator />
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              placeholder="Doe"
+              value={formData.lastName}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-fontColor-dark ${errors.lastName ? 'border-primary' : 'border-fontColor-light'
+                }`}
+            />
+            {errors.lastName && <p className="mt-1 text-sm text-primary">{errors.lastName}</p>}
+          </div>
         </div>
 
         <div>
@@ -109,7 +133,7 @@ const RegisterForm = () => {
             type="email"
             id="email"
             name="email"
-            placeholder="example.email.com"
+            placeholder="example@email.com"
             value={formData.email}
             onChange={handleChange}
             className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-1 focus:ring-fontColor-dark ${errors.email ? 'border-primary' : 'border-fontColor-light'
@@ -197,7 +221,7 @@ const RegisterForm = () => {
             <div className="w-full border-t border-fontColor-light"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-fontColor-light">Or</span>
+            <span className="px-2 bg-white text-fontColor-light">Or continue with</span>
           </div>
         </div>
 
@@ -223,7 +247,7 @@ const RegisterForm = () => {
               fill="#EA4335"
             />
           </svg>
-          Continue with Google
+          Google
         </button>
 
         <p className="text-sm text-center text-fontColor-dark mt-4">
